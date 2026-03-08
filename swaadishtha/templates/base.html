@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+
+    <title>{%block title%}Swaadistha - Authentic Indian Cuisine{%endblock%}</title>
+</head>
+
+<body class="container mx-auto px-4 py-6 bg-[rgb(var(--color-surface))] min-h-screen flex flex-col justify-between">
+    {% include "components/navbar.html" %}
+
+    <main class="">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "components/footer.html" %}
+</body>
+</html>

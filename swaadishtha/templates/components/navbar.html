@@ -1,0 +1,132 @@
+{% load static %}
+
+<header class="bg-[rgb(var(--color-background))] border-b border-[rgb(var(--color-border))] sticky top-0 z-50">
+
+<nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <!-- LEFT : Logo -->
+    <div class="flex items-center gap-6">
+
+        <a href="/" class="text-2xl font-heading text-[rgb(var(--color-heading))]">
+            Swaadistha
+        </a>
+
+    </div>
+
+
+    <!-- CENTER : Navigation -->
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-[rgb(var(--color-text))]">
+
+        <a href="#" class="hover:text-[rgb(var(--color-primary))] transition">
+            About
+        </a>
+
+        <a href="#" class="hover:text-[rgb(var(--color-primary))] transition">
+            Trending
+        </a>
+
+
+        <!-- Products Dropdown -->
+        <div class="relative group">
+
+            <button class="flex items-center gap-1 hover:text-[rgb(var(--color-primary))] transition">
+                Products
+                <span class="text-xs">▾</span>
+            </button>
+
+            <!-- Dropdown -->
+            <div class="absolute left-0 mt-3 w-48 bg-white shadow-lg rounded-lg border border-[rgb(var(--color-border))] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+
+                <ul class="py-2 text-sm text-[rgb(var(--color-text))]">
+
+                    <!-- Later replace with dynamic categories -->
+
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-[rgb(var(--color-surface))]">
+                            Pickles
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-[rgb(var(--color-surface))]">
+                            Spices
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-[rgb(var(--color-surface))]">
+                            Snacks
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT : Icons -->
+    <div class="flex items-center gap-5">
+
+        <!-- Wishlist -->
+        <a href="#" class="hover:text-[rgb(var(--color-primary))]">
+
+            <img class="w-5" src="{% static 'icons/wishlist.svg' %}">
+
+        </a>
+
+
+        <!-- Cart -->
+        <a href="#" class="hover:text-[rgb(var(--color-primary))]">
+
+            <img class="w-5" src="{% static 'icons/cart.svg' %}">
+
+        </a>
+
+
+        <!-- Auth Section -->
+        {% if request.user.is_authenticated %}
+
+        <div class="relative group">
+
+            <button class="flex items-center gap-2">
+
+                <img class="w-5" src="{% static 'icons/user.svg' %}">
+
+            </button>
+
+
+            <!-- Dropdown -->
+            <div class="absolute right-0 mt-3 w-40 bg-white border border-[rgb(var(--color-border))] rounded-lg shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-[rgb(var(--color-surface))]">
+                    Edit Profile
+                </a>
+
+                <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm hover:bg-[rgb(var(--color-surface))]">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <a href="{% url 'login' %}"
+           class="bg-[rgb(var(--color-primary))] text-white text-sm px-4 py-2 rounded-lg hover:opacity-90 transition">
+
+            Login
+
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+</header>

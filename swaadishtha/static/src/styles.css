@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  /* Base Brand Colors (RGB format for opacity support) */
+  --color-background: 249 245 240;
+  --color-surface: 242 234 211;
+  --color-accent: 244 153 26;
+  --color-primary: 52 79 31;
+
+  /* Text System */
+  --color-text: 38 38 38;
+  --color-text-muted: 110 98 78;
+  --color-heading: 52 79 31;
+
+  /* Border */
+  --color-border: 220 214 200;
+
+  /* Fonts */
+  --font-sans: "DM Sans", sans-serif;
+  --font-heading: "Playfair Display", serif;
+}

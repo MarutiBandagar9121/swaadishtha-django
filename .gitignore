@@ -1,0 +1,16 @@
+# virtual environment
+venv/
+
+# env files
+.env
+.env.production
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.cpython-*.pyc
+
+# node modules
+node_modules/

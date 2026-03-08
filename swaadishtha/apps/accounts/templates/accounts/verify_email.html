@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Verify Email - Swaadistha{% endblock %}
+
+{% block content %}
+
+<div class="flex items-center justify-center min-h-[75vh]">
+
+    <div class="bg-white shadow-md rounded-xl p-8 w-full max-w-md">
+
+        <!-- Heading -->
+        <h1 class="text-2xl font-semibold text-center mb-2">
+            Verify your email
+        </h1>
+
+        <p class="text-sm text-gray-500 text-center mb-6">
+            Enter the verification code sent to your email.
+        </p>
+
+        <!-- Error message -->
+        {% if error %}
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <!-- OTP Form -->
+        <form method="POST" class="space-y-4">
+
+            {% csrf_token %}
+
+            <div>
+                <label class="block text-sm font-medium mb-1">
+                    Verification Code
+                </label>
+
+                <input
+                    type="text"
+                    name="otp"
+                    maxlength="6"
+                    required
+                    placeholder="Enter 6-digit code"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 text-center text-lg tracking-widest focus:outline-none focus:ring focus:ring-gray-200"
+                >
+            </div>
+
+            <button
+                type="submit"
+                class="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition"
+            >
+                Verify Email
+            </button>
+
+        </form>
+
+        <!-- Resend OTP (we will implement later) -->
+        <p class="text-sm text-center text-gray-600 mt-6">
+            Didn't receive the code?
+            <a href="#" class="text-blue-600 hover:underline">
+                Resend
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
