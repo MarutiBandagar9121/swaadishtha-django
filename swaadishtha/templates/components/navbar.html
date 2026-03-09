@@ -35,7 +35,7 @@
             </button>
 
             <!-- Dropdown -->
-            <div class="absolute left-0 mt-3 w-48 bg-white shadow-lg rounded-lg border border-[rgb(var(--color-border))] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+            <div class="absolute left-0  w-48 bg-white shadow-lg rounded-lg border border-[rgb(var(--color-border))] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
 
                 <ul class="py-2 text-sm text-[rgb(var(--color-text))]">
 
@@ -100,15 +100,23 @@
 
 
             <!-- Dropdown -->
-            <div class="absolute right-0 mt-3 w-40 bg-white border border-[rgb(var(--color-border))] rounded-lg shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+            <div class="absolute right-0 w-40 bg-white border border-[rgb(var(--color-border))] rounded-lg shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
 
                 <a href="#" class="block px-4 py-2 text-sm hover:bg-[rgb(var(--color-surface))]">
                     Edit Profile
                 </a>
 
-                <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm hover:bg-[rgb(var(--color-surface))]">
+                <!-- <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm hover:bg-[rgb(var(--color-surface))]">
                     Logout
-                </a>
+                </a> -->
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button
+                        type="submit"
+                        class="block w-full text-left px-4 py-2 text-sm hover:bg-[rgb(var(--color-surface))]">
+                        Logout
+                    </button>
+                </form>
 
             </div>
 

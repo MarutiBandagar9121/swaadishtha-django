@@ -195,6 +195,6 @@ class SetPasswordView(View):
         return redirect("/")
 
 class LogoutView(View):
-    def get(self, request):
-        # Handle logout logic here
-        pass
+    def post(self, request):
+        logout(request)
+        return redirect("login")
