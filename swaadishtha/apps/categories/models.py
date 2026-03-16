@@ -11,7 +11,7 @@ class Category(models.Model):
 
     description = models.TextField(blank=True)
 
-    image_url = models.URLField(blank=True)
+    image = models.ImageField(upload_to='categories/', blank=True, null=True)
 
     is_active = models.BooleanField(default=True)
 
