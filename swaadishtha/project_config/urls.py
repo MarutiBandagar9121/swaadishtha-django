@@ -19,6 +19,8 @@ from django.urls import include, path
 from categories import urls as categories_urls
 from core import urls as core_urls
 from accounts import urls as accounts_urls
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -27,3 +29,6 @@ urlpatterns = [
     path('categories/', include(categories_urls)),
     path('accounts/', include(accounts_urls)),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

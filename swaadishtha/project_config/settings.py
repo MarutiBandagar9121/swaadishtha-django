@@ -15,6 +15,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from decouple import config
 from pathlib import Path
 import sys
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,7 +50,9 @@ INSTALLED_APPS = [
     'core',
     'categories',
     'products',
-    'orders'
+    'orders',
+    'coupons',
+    'reviews'
 ]
 
 MIDDLEWARE = [
@@ -144,3 +147,11 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'core:home'
 LOGOUT_REDIRECT_URL = 'core:home'
+
+#setting up media root
+MEDIA_URL = '/media/'
+
+if DEBUG:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/dev')
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

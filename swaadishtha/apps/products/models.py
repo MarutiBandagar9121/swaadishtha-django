@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 import uuid
+from .services.file_upload import get_product_image_upload_path, get_product_variant_image_upload_path
 
 
 class Product(models.Model):
@@ -16,20 +17,12 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255, unique=True, blank=True)
 
     description = models.TextField(blank=True)
-
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-
     # Many-to-Many with Category
     categories = models.ManyToManyField(
         'categories.Category',
         related_name='products',
         blank=True
     )
-
-    image = models.ImageField(upload_to='products/', blank=True, null=True)
-
-    stock = models.PositiveIntegerField(default=0)
-
     is_active = models.BooleanField(default=True)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.DRAFT)
 
@@ -47,8 +40,6 @@ class Product(models.Model):
             models.Index(fields=['is_active']),
             # common filter: active + published products
             models.Index(fields=['is_active', 'status']),
-            # price range filtering (e.g. products between $10–$50)
-            models.Index(fields=['price']),
             # name search / ordering
             models.Index(fields=['name']),
         ]
@@ -73,7 +64,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='products/', blank=True, null=True)
+    image = models.ImageField(upload_to=get_product_image_upload_path, blank=True, null=True)
     alt_text = models.CharField(max_length=255, blank=True)
     position = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -157,7 +148,7 @@ class ProductVariant(models.Model):
 class VariantImage(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     variant = models.ForeignKey('ProductVariant', on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='variants/', blank=True, null=True)
+    image = models.ImageField(upload_to=get_product_variant_image_upload_path, blank=True, null=True)
     alt_text = models.CharField(max_length=255, blank=True)
     position = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
