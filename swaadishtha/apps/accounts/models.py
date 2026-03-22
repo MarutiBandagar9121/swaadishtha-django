@@ -28,11 +28,11 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class OTPPurpose(models.TextChoices):
-    EMAIL_VERIFICATION = "email_verification", "Email_Verification"
-    EMAIL_LOGIN = "email_login", "Email_Login"
-    PASSWORD_RESET = "password_reset", "Password_Reset"
-    WHATSAPP_NUMBER_VERIFICATION = "phone_number_verification", "Phone_Number_Verification"
-    WHATSAPP_LOGIN = "whatsapp_login", "WhatsApp_Login"
+    EMAIL_VERIFICATION = "email_verification", "Email Verification"
+    EMAIL_LOGIN = "email_login", "Email Login"
+    PASSWORD_RESET = "password_reset", "Password Reset"
+    WHATSAPP_NUMBER_VERIFICATION = "phone_number_verification", "Phone Number Verification"
+    WHATSAPP_LOGIN = "whatsapp_login", "WhatsApp Login"
 
 class User(AbstractUser):
     
@@ -44,9 +44,9 @@ class User(AbstractUser):
     secondary_phone_number = models.CharField(max_length=20, blank=True)
     email_verified = models.BooleanField(default=False)
     whatsapp_number_verified = models.BooleanField(default=False)
+    last_login_ip = models.GenericIPAddressField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    last_login_ip = models.GenericIPAddressField(null=True, blank=True)
 
     USERNAME_FIELD = 'email' #Set email as the unique identifier for authentication
     REQUIRED_FIELDS = ['name'] #Make name a required field when creating a user
@@ -56,14 +56,45 @@ class User(AbstractUser):
     class Meta:
         ordering = ['-created_at']
         indexes = [
-            models.Index(fields=['email']),
+            # email index removed — unique=True already creates one automatically
             models.Index(fields=['whatsapp_number']),
         ]
         verbose_name ="User"
         verbose_name_plural = 'Users'
 
     def __str__(self):
-        return f"{self.name} ({self.email}), user_id: {self.user_id}"
+        return f"{self.name} ({self.email})"
+    
+class AddressType(models.TextChoices):
+    HOME = 'home', 'Home'
+    WORK = 'work', 'Work'
+    OTHER = 'other', 'Other'
+
+
+class UserAddress(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='addresses')
+    address_type = models.CharField(max_length=20, choices=AddressType.choices, default=AddressType.HOME)
+    address_line1 = models.CharField(max_length=255)
+    address_line2 = models.CharField(max_length=255, blank=True)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    postal_code = models.CharField(max_length=20)
+    country = models.CharField(max_length=255)
+    is_default = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            # composite is better — queries always filter by user first, then is_default
+            models.Index(fields=['user', 'is_default']),
+        ]
+        verbose_name_plural = 'User Addresses'
+
+    def __str__(self):
+        return f"{self.address_line1}, {self.city}, {self.state}, {self.country}"
 
 class UserOtp(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -71,18 +102,22 @@ class UserOtp(models.Model):
     purpose = models.CharField(max_length=50, choices=OTPPurpose.choices)
     otp_hash = models.CharField(max_length=255)
     attempts_count = models.PositiveIntegerField(default=0)
+    is_used = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     expires_at = models.DateTimeField()
-    is_used = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-created_at']
         indexes = [
             models.Index(fields=['otp_hash']),
             models.Index(fields=['expires_at']),
-            models.Index(fields=['user','is_used']),
+            # typical OTP lookup: unused OTP for this user for this specific purpose
+            models.Index(fields=['user', 'purpose', 'is_used']),
         ]
         verbose_name_plural = 'OTPs'
     
     def is_expired(self):
         return timezone.now() > self.expires_at
+
+    def __str__(self):
+        return f"{self.user.email} — {self.purpose} ({'used' if self.is_used else 'pending'})"

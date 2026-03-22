@@ -102,7 +102,7 @@ user_address{
   city string
   state string
   country string
-  zipcode string
+  postal_code string
 }
 
 user_otp{
@@ -133,6 +133,20 @@ order_products{
   product_qty int
   product_price decimal
   subtotal decimal
+}
+
+order_address{
+    id uuid pk
+    order_id uuid fk not null
+    address_type string not null
+    address_line1 string
+    address_line2 string
+    city string
+    state string
+    country string
+    postal_code string
+    created_at timestamp
+    updated_at timestamp
 }
 
 payment_info{
@@ -190,8 +204,12 @@ wishlist_items{
 
 coupons{
   id uuid pk
-  name string
-  discount_percentage float
+  code string
+  discount_type string not null
+  discount_value decimal not null
+  min_purchase_amount decimal
+  max_uses int
+  current_uses int default 0
   valid_from date
   valid_upto date
   created_at timestamp
@@ -209,9 +227,9 @@ coupon_usage{
 reviews{
   id uuid pk
   user_id string fk
-  product_id string fk
+  product_variant_id string fk
   rating float
-  description string
+  comment string
   status string
   created_at timestamp
   updated_at timestamp
