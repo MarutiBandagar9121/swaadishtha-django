@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 import uuid
+from apps.common.storage import UploadPath
 
 
 class Category(models.Model):
@@ -11,7 +12,7 @@ class Category(models.Model):
 
     description = models.TextField(blank=True)
 
-    image = models.ImageField(upload_to='categories/', blank=True, null=True)
+    image = models.ImageField(upload_to=UploadPath('categories', 'id'), blank=True, null=True)
 
     is_active = models.BooleanField(default=True)
 

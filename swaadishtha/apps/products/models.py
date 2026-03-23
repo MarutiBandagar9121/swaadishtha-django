@@ -1,15 +1,15 @@
 from django.db import models
 from django.utils.text import slugify
 import uuid
-from .services.file_upload import get_product_image_upload_path, get_product_variant_image_upload_path
+from apps.common.storage import UploadPath
 
 
 class Product(models.Model):
 
     class Status(models.TextChoices):
-        DRAFT = 'draft', 'Draft'
-        PUBLISHED = 'published', 'Published'
-        ARCHIVED = 'archived', 'Archived'
+        DRAFT = 'Draft', 'Draft'
+        PUBLISHED = 'Published', 'Published'
+        ARCHIVED = 'Archived', 'Archived'
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
@@ -64,7 +64,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to=get_product_image_upload_path, blank=True, null=True)
+    image = models.ImageField(upload_to=UploadPath('products', 'product_id'), blank=True, null=True)
     alt_text = models.CharField(max_length=255, blank=True)
     position = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -148,7 +148,7 @@ class ProductVariant(models.Model):
 class VariantImage(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     variant = models.ForeignKey('ProductVariant', on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to=get_product_variant_image_upload_path, blank=True, null=True)
+    image = models.ImageField(upload_to=UploadPath('product_variant', 'variant_id'), blank=True, null=True)
     alt_text = models.CharField(max_length=255, blank=True)
     position = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
