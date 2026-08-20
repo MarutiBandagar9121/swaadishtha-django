@@ -1,59 +1,378 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}Swaadishtha — Pure Indian Foods | Natural, Authentic & Healthy{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Swaadishtha brings you 100% natural, authentic Indian foods — homemade pickles, traditional spices, healthy snacks and more. No artificial preservatives. Free shipping on orders above ₹499.">
+<meta name="keywords" content="authentic Indian food online, natural Indian pickles, buy Indian spices, healthy Indian snacks, homemade achaar, traditional Indian food, pure Indian food brand">
+{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto py-12">
-    <h1 class="text-4xl font-bold text-amber-500 mb-8">
-        Welcome to Django + Tailwind!
-    </h1>
-    <p class="text-lg text-gray-600">
-        This text is styled with Tailwind CSS.
-    </p>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-        Click me!
-    </button>
+
+
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<section class="py-16 md:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
+
+        <!-- Left copy — 3 cols -->
+        <div class="md:col-span-3">
+            <p class="text-xs font-semibold tracking-[0.25em] uppercase text-[rgb(var(--color-accent))] mb-6">
+                Authentic &nbsp;·&nbsp; Natural &nbsp;·&nbsp; Indian
+            </p>
+
+            <h1 class="font-heading text-5xl md:text-6xl lg:text-[4.5rem] text-[rgb(var(--color-heading))] leading-[1.05] mb-8">
+                Pure Flavours<br>
+                from India's<br>
+                <span class="text-[rgb(var(--color-accent))]">Kitchens.</span>
+            </h1>
+
+            <p class="text-[rgb(var(--color-text-muted))] text-base leading-relaxed max-w-md mb-10">
+                Handcrafted using age-old recipes passed down through generations.
+                Real ingredients, zero shortcuts — the taste your grandparents grew up with,
+                delivered to your door.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 mb-14">
+                <a href="{% url 'category_list' %}"
+                   class="bg-[rgb(var(--color-primary))] text-white px-8 py-3.5 rounded-xl text-sm font-medium hover:opacity-90 transition-all shadow-sm">
+                    Shop Now
+                </a>
+                <a href="#categories"
+                   class="inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--color-primary))] group">
+                    Browse Categories
+                    <span class="group-hover:translate-x-1 transition-transform duration-200">&#8594;</span>
+                </a>
+            </div>
+
+            <!-- Stats row -->
+            <div class="flex gap-10 border-t border-[rgb(var(--color-border))] pt-8">
+                <div>
+                    <p class="font-heading text-3xl font-bold text-[rgb(var(--color-heading))]">50+</p>
+                    <p class="text-[10px] text-[rgb(var(--color-text-muted))] mt-1 tracking-[0.15em] uppercase">Products</p>
+                </div>
+                <div>
+                    <p class="font-heading text-3xl font-bold text-[rgb(var(--color-heading))]">10K+</p>
+                    <p class="text-[10px] text-[rgb(var(--color-text-muted))] mt-1 tracking-[0.15em] uppercase">Customers</p>
+                </div>
+                <div>
+                    <p class="font-heading text-3xl font-bold text-[rgb(var(--color-heading))]">100%</p>
+                    <p class="text-[10px] text-[rgb(var(--color-text-muted))] mt-1 tracking-[0.15em] uppercase">Natural</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right visual — stacked info cards — 2 cols -->
+        <div class="hidden md:flex md:col-span-2 flex-col gap-4">
+
+            <div class="bg-[rgb(var(--color-primary))] rounded-2xl p-7 text-white">
+                <p class="text-[10px] font-semibold tracking-[0.2em] uppercase opacity-50 mb-2">No Preservatives</p>
+                <p class="font-heading text-2xl leading-snug">Farm-fresh<br>ingredients only</p>
+            </div>
+
+            <div class="bg-[rgb(var(--color-surface))] rounded-2xl p-7 border border-[rgb(var(--color-border))] ml-6">
+                <p class="text-[10px] font-semibold tracking-[0.2em] uppercase text-[rgb(var(--color-text-muted))] mb-2">Traditional Recipes</p>
+                <p class="font-heading text-2xl text-[rgb(var(--color-heading))] leading-snug">Made with<br>generations of love</p>
+            </div>
+
+            <div class="bg-[rgb(var(--color-accent))] rounded-2xl p-7 text-white ml-2">
+                <p class="text-[10px] font-semibold tracking-[0.2em] uppercase opacity-60 mb-2">Pan India Delivery</p>
+                <p class="font-heading text-2xl leading-snug">Delivered fresh<br>across India</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════
+     TRUST STRIP
+═══════════════════════════════════ -->
+<div class="-mx-4 border-y border-[rgb(var(--color-border))] bg-[rgb(var(--color-surface))]">
+    <div class="px-4 py-4 flex flex-wrap justify-center gap-x-8 gap-y-2 text-[11px] font-medium tracking-[0.15em] uppercase text-[rgb(var(--color-text-muted))]">
+        <span>100% Natural Ingredients</span>
+        <span class="hidden md:inline text-[rgb(var(--color-border))]">/</span>
+        <span>Zero Artificial Preservatives</span>
+        <span class="hidden md:inline text-[rgb(var(--color-border))]">/</span>
+        <span>Free Shipping on &#8377;499+</span>
+        <span class="hidden md:inline text-[rgb(var(--color-border))]">/</span>
+        <span>Handcrafted in Small Batches</span>
+        <span class="hidden md:inline text-[rgb(var(--color-border))]">/</span>
+        <span>Secure Payments</span>
+    </div>
 </div>
-<div class="max-w-4xl mx-auto py-12">
-    <h1 class="text-4xl font-bold text-amber-500 mb-8">
-        Welcome to Django + Tailwind!
-    </h1>
-    <p class="text-lg text-gray-600">
-        This text is styled with Tailwind CSS.
+
+
+<!-- ═══════════════════════════════════
+     CATEGORIES
+═══════════════════════════════════ -->
+<section id="categories" class="py-20">
+
+    <!-- Section header with "view all" link aligned right -->
+    <div class="flex items-end justify-between mb-10">
+        <div>
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[rgb(var(--color-accent))] mb-2">Our Range</p>
+            <h2 class="font-heading text-4xl text-[rgb(var(--color-heading))]">Shop by Category</h2>
+        </div>
+        <a href="{% url 'category_list' %}"
+           class="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-[rgb(var(--color-primary))] hover:underline">
+            View all <span>&#8594;</span>
+        </a>
+    </div>
+
+    {% if categories %}
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {% for category in categories %}
+        <a href="{% url 'category_list' %}" class="group">
+
+            <!-- Square card -->
+            <div class="aspect-square rounded-2xl overflow-hidden relative bg-[rgb(var(--color-surface))] border border-[rgb(var(--color-border))] group-hover:border-transparent group-hover:shadow-xl transition-all duration-300">
+
+                {% if category.image %}
+                <img src="{{ category.image.url }}" alt="{{ category.name }}"
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                {% else %}
+                <!-- Placeholder image -->
+                <img src="{% static 'images/swaadishtha_placeholder_image.png' %}" alt="{{ category.name }}"
+                     class="w-full h-full object-cover">
+                {% endif %}
+
+                <!-- Always-visible name tag at bottom -->
+                <div class="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/50 to-transparent p-4 rounded-b-2xl">
+                    <p class="text-white text-sm font-medium">{{ category.name }}</p>
+                </div>
+
+            </div>
+
+        </a>
+        {% endfor %}
+    </div>
+
+    <div class="sm:hidden text-center mt-6">
+        <a href="{% url 'category_list' %}"
+           class="inline-block border border-[rgb(var(--color-primary))] text-[rgb(var(--color-primary))] text-sm font-medium px-6 py-2.5 rounded-xl hover:bg-[rgb(var(--color-surface))] transition">
+            View All Categories
+        </a>
+    </div>
+
+    {% else %}
+    <!-- Skeleton placeholders -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        {% for i in "12345" %}
+        <div class="aspect-square rounded-2xl bg-[rgb(var(--color-surface))] animate-pulse"></div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</section>
+
+
+<!-- ═══════════════════════════════════
+     FEATURED PRODUCTS
+═══════════════════════════════════ -->
+{% if featured_products %}
+<section class="-mx-4 px-4 py-20 bg-[rgb(var(--color-surface))]">
+
+    <div class="flex items-end justify-between mb-10">
+        <div>
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[rgb(var(--color-accent))] mb-2">Curated for You</p>
+            <h2 class="font-heading text-4xl text-[rgb(var(--color-heading))]">Featured Picks</h2>
+        </div>
+        <a href="#" class="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-[rgb(var(--color-primary))] hover:underline">
+            View all <span>&#8594;</span>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+        {% for product in featured_products %}
+        {% include "components/product_card.html" with product=product %}
+        {% endfor %}
+    </div>
+
+</section>
+{% endif %}
+
+
+<!-- ═══════════════════════════════════
+     FROM OUR KITCHEN — MARKETING
+═══════════════════════════════════ -->
+<section class="py-20">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+
+        <!-- Left — Brand story text -->
+        <div>
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[rgb(var(--color-accent))] mb-4">Our Philosophy</p>
+            <h2 class="font-heading text-4xl text-[rgb(var(--color-heading))] leading-tight mb-6">
+                From Our Kitchen<br>to Your Table
+            </h2>
+            <p class="text-[rgb(var(--color-text-muted))] leading-relaxed mb-4">
+                At Swaadishtha, we believe that the best food is honest food. No artificial colours,
+                no mystery additives — just real ingredients, real flavour, and real care behind
+                every product.
+            </p>
+            <p class="text-[rgb(var(--color-text-muted))] leading-relaxed mb-10">
+                We are a small team with a deep love for Indian food traditions. Every recipe we
+                follow is something our grandmothers would recognise — and approve of.
+            </p>
+            <a href="#"
+               class="inline-block bg-[rgb(var(--color-primary))] text-white px-7 py-3 rounded-xl text-sm font-medium hover:opacity-90 transition shadow-sm">
+                Our Story
+            </a>
+        </div>
+
+        <!-- Right — 4 feature points -->
+        <div class="space-y-6">
+
+            <div class="flex gap-5 items-start">
+                <div class="shrink-0 w-10 h-10 rounded-xl bg-[rgb(var(--color-primary))]/10 flex items-center justify-center">
+                    <span class="font-heading text-sm font-bold text-[rgb(var(--color-primary))]">01</span>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-[rgb(var(--color-heading))] mb-1">Farm-Fresh Ingredients</h4>
+                    <p class="text-sm text-[rgb(var(--color-text-muted))] leading-relaxed">
+                        Sourced directly from Indian farms. No long supply chains, no quality compromise.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-t border-[rgb(var(--color-border))]"></div>
+
+            <div class="flex gap-5 items-start">
+                <div class="shrink-0 w-10 h-10 rounded-xl bg-[rgb(var(--color-primary))]/10 flex items-center justify-center">
+                    <span class="font-heading text-sm font-bold text-[rgb(var(--color-primary))]">02</span>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-[rgb(var(--color-heading))] mb-1">Recipes Passed Down Generations</h4>
+                    <p class="text-sm text-[rgb(var(--color-text-muted))] leading-relaxed">
+                        Every product follows a recipe refined over decades in Indian homes. No guesswork.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-t border-[rgb(var(--color-border))]"></div>
+
+            <div class="flex gap-5 items-start">
+                <div class="shrink-0 w-10 h-10 rounded-xl bg-[rgb(var(--color-primary))]/10 flex items-center justify-center">
+                    <span class="font-heading text-sm font-bold text-[rgb(var(--color-primary))]">03</span>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-[rgb(var(--color-heading))] mb-1">Quality Checked Every Batch</h4>
+                    <p class="text-sm text-[rgb(var(--color-text-muted))] leading-relaxed">
+                        Each batch is checked for freshness, hygiene, and taste before it leaves our kitchen.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-t border-[rgb(var(--color-border))]"></div>
+
+            <div class="flex gap-5 items-start">
+                <div class="shrink-0 w-10 h-10 rounded-xl bg-[rgb(var(--color-accent))]/15 flex items-center justify-center">
+                    <span class="font-heading text-sm font-bold text-[rgb(var(--color-accent))]">04</span>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-[rgb(var(--color-heading))] mb-1">Packed to Preserve Freshness</h4>
+                    <p class="text-sm text-[rgb(var(--color-text-muted))] leading-relaxed">
+                        Airtight, eco-conscious packaging — as fresh on arrival as the day it was made.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════
+     BEST SELLERS
+═══════════════════════════════════ -->
+{% if bestsellers %}
+<section class="-mx-4 px-4 py-20 bg-[rgb(var(--color-surface))]">
+
+    <div class="flex items-end justify-between mb-10">
+        <div>
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase text-[rgb(var(--color-accent))] mb-2">Most Loved</p>
+            <h2 class="font-heading text-4xl text-[rgb(var(--color-heading))]">Best Sellers</h2>
+        </div>
+        <a href="#" class="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-[rgb(var(--color-primary))] hover:underline">
+            View all <span>&#8594;</span>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+        {% for product in bestsellers %}
+        {% include "components/product_card.html" with product=product badge="Best Seller" %}
+        {% endfor %}
+    </div>
+
+</section>
+{% endif %}
+
+
+<!-- ═══════════════════════════════════
+     FULL-WIDTH BRAND BAND
+═══════════════════════════════════ -->
+<div class="-mx-4 px-4 bg-[rgb(var(--color-primary))] py-20 text-center text-white">
+
+    <p class="text-[11px] font-semibold tracking-[0.3em] uppercase opacity-50 mb-6">
+        Swaadishtha
     </p>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-        Click me!
-    </button>
+
+    <blockquote class="font-heading text-3xl md:text-4xl italic leading-snug max-w-2xl mx-auto mb-8">
+        "&#x938;&#x94D;&#x935;&#x93E;&#x926;&#x93F;&#x937;&#x94D;&#x920; — because food made<br class="hidden md:inline"> with love always tastes better."
+    </blockquote>
+
+    <a href="{% url 'category_list' %}"
+       class="inline-block border border-white/40 text-white text-sm font-medium px-8 py-3 rounded-xl hover:bg-white/10 transition">
+        Explore Our Products
+    </a>
+
 </div>
-<div class="max-w-4xl mx-auto py-12">
-    <h1 class="text-4xl font-bold text-amber-500 mb-8">
-        Welcome to Django + Tailwind!
-    </h1>
-    <p class="text-lg text-gray-600">
-        This text is styled with Tailwind CSS.
-    </p>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-        Click me!
-    </button>
-</div>
-<div class="max-w-4xl mx-auto py-12">
-    <h1 class="text-4xl font-bold text-amber-500 mb-8">
-        Welcome to Django + Tailwind!
-    </h1>
-    <p class="text-lg text-gray-600">
-        This text is styled with Tailwind CSS.
-    </p>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-        Click me!
-    </button>
-</div>
-<div class="max-w-4xl mx-auto py-12">
-    <h1 class="text-4xl font-bold text-amber-500 mb-8">
-        Welcome to Django + Tailwind!
-    </h1>
-    <p class="text-lg text-gray-600">
-        This text is styled with Tailwind CSS.
-    </p>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-        Click me!
-    </button>
-</div>
+
+
+<!-- ═══════════════════════════════════
+     SEO CONTENT
+═══════════════════════════════════ -->
+<section class="-mx-4 px-4 py-16 bg-[rgb(var(--color-surface))] border-t border-[rgb(var(--color-border))]">
+    <div class="max-w-3xl mx-auto text-center">
+
+        <h2 class="font-heading text-2xl text-[rgb(var(--color-heading))] mb-6">
+            Buy Authentic Indian Foods Online — Swaadishtha
+        </h2>
+
+        <p class="text-sm text-[rgb(var(--color-text-muted))] leading-relaxed mb-4">
+            Swaadishtha is an online store dedicated to bringing you the best of traditional Indian
+            food culture. Whether you're looking for
+            <strong class="text-[rgb(var(--color-text))]">homemade achaar</strong>,
+            <strong class="text-[rgb(var(--color-text))]">pure Indian spices</strong>,
+            <strong class="text-[rgb(var(--color-text))]">healthy namkeen</strong>, or
+            <strong class="text-[rgb(var(--color-text))]">natural food products</strong>
+            — you'll find them here, crafted with integrity and shipped fresh to your home
+            anywhere in India.
+        </p>
+
+        <p class="text-sm text-[rgb(var(--color-text-muted))] leading-relaxed mb-4">
+            Unlike mass-produced alternatives, every Swaadishtha product is made in small batches
+            to ensure quality. We use no artificial preservatives, no artificial colours, and no
+            synthetic flavour enhancers — only the wholesome ingredients Indian grandmothers
+            have trusted for centuries.
+        </p>
+
+        <p class="text-sm text-[rgb(var(--color-text-muted))] leading-relaxed">
+            From the tang of a classic <em>mango pickle</em> to the warmth of
+            <em>hand-ground garam masala</em>, our range covers every corner of the Indian pantry.
+            Explore our categories, place your order, and experience the real taste of India —
+            delivered to your doorstep with a GST-compliant invoice and free shipping on
+            orders above &#8377;499.
+        </p>
+
+    </div>
+</section>
+
+
 {% endblock %}
